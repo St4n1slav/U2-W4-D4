@@ -28,7 +28,30 @@ function getHamster() {
     headers: myHeaders,
   };
 
+  document.getElementById("imgCont").innerHTML = "";
+
   fetch("https://api.pexels.com/v1/search?query=hamsters", requestOptions)
+    .then((response) => response.json())
+    .then((result) =>
+      result.photos.forEach((element) => {
+        document.getElementById("imgCont").innerHTML += elementTemplate.replace("%url", element.src.original);
+      })
+    )
+    .catch((error) => console.log("error", error));
+}
+
+function getTigers() {
+  let myHeaders = new Headers();
+  myHeaders.append("Authorization", APIkey);
+
+  let requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+  };
+
+  document.getElementById("imgCont").innerHTML = "";
+
+  fetch("https://api.pexels.com/v1/search?query=tigers", requestOptions)
     .then((response) => response.json())
     .then((result) =>
       result.photos.forEach((element) => {
